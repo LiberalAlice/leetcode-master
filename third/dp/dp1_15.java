@@ -1,15 +1,13 @@
 package third.dp;
 
+import java.util.Scanner;
+
 /**
  * @Author：wuwei
  * @Date：2023/2/28
  */
 public class dp1_15 {
-    public static void main(String[] args) {
-        dp1_15 dp1_15 = new dp1_15();
-        int[] a = {1,2,3,5};
-        dp1_15.canPartition(a);
-    }
+
 
 
     //2.斐波那契
@@ -182,5 +180,13 @@ public class dp1_15 {
             }
         }
         return sum - 2 * dp[target];
+    }
+
+
+
+
+    public static void main(String[] args) {
+        dp1_15 dp1_15 = new dp1_15();
+        int[] a = {1, 2, 3, 5};
     }
 }
