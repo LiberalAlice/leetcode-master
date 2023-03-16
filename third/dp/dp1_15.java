@@ -1,6 +1,5 @@
 package third.dp;
 
-import java.util.Scanner;
 
 /**
  * @Author：wuwei

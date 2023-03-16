@@ -1,3 +1,5 @@
+package backtracing;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,9 +10,14 @@ import java.util.List;
  */
 public class newbck {
     ArrayList<Integer> list = new ArrayList<>();
-    List<List<Integer>> result = new ArrayList<>();
+    static List<List<Integer>> result = new ArrayList<>();
 
     public static void main(String[] args) {
+        int[] nums = {10, 1, 2, 7, 6, 1, 5};
+        newbck newbck = new newbck();
+        newbck.partition("aab");
+        newbck.resultlist.stream().forEach(strings -> System.out.println(strings));
+
 
     }
 
@@ -113,6 +120,70 @@ public class newbck {
             buffer.deleteCharAt(buffer.length()- 1) ;
         }
         return result;
+    }
+
+    //8.组合总和2
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        int[] used = new int[candidates.length];
+        getCombine(candidates, target, 0, used);
+        return result;
+    }
+
+    private void getCombine(int[] candidates, int target, int index, int[] used) {
+        if (target == 0) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < candidates.length ; i++) {
+            if (target - candidates[i] < 0) {
+                break;
+            }
+            if (i > 0 && used[i - 1] == 0 && candidates[i] == candidates[i - 1]) {
+                continue;
+            }
+            list.add(candidates[i]);
+            target -= candidates[i];
+            used[i] = 1;
+            getCombine(candidates, target, i + 1, used);
+            target += candidates[i];
+            used[i] = 0;
+            list.remove(list.size() - 1);
+        }
+    }
+
+    //9.分割回文串
+    public List<List<String>> partition(String s) {
+        cutToCycle(s,0);
+        return resultlist;
+    }
+    List<String> stringlist = new ArrayList<>();
+    List<List<String>> resultlist = new ArrayList<>();
+    private void cutToCycle(String s, int start) {
+        if (start >= s.length()) {
+            resultlist.add(new ArrayList<>(stringlist));
+            return;
+        }
+        for (int i = start; i < s.length(); i++) {
+            String substring = s.substring(start,i + 1);
+            if (!iscycle(substring)) {continue;}
+            stringlist.add(substring);
+            cutToCycle(s, i + 1);
+            stringlist.remove(stringlist.size() - 1);
+        }
+    }
+
+    private boolean iscycle(String substring) {
+        int left = 0;
+        int right = substring.length() - 1;
+        while (left < right) {
+            if (substring.charAt(left) != substring.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
     }
 
 
